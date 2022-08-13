@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import authRouter from './routes/auth.routes.js';
 import userRouter from './routes/users.routes.js';
 import meetingRouter from './routes/meeting.routes.js';
+import token from './routes/token.routes.js';
 
 const app = express();
 dotenv.config();
@@ -22,6 +23,7 @@ app.use(express.json());
 app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);
 app.use("/api/meeting", meetingRouter);
+app.use("/api/token", token);
 
 app.use((err, req, res, next) => {
     const status = err.status || 500;
