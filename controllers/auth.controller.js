@@ -49,6 +49,7 @@ export const signin = async (req, res, next) => {
             })
             .status(200)
             .json(others);
+        
     } catch (err) {
         next(err);
     }
