@@ -1,34 +1,20 @@
 import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 import { createError } from "../error.js";
-import dotenv from 'dotenv';
 import jwt from "jsonwebtoken";
-import { connect } from "getstream";
-import crypto from "crypto";
-import { StreamChat } from 'stream-chat';
-
-dotenv.config();
-
-const api_key = process.env.STREAM_API_KEY;
-const api_secret = process.env.STREAM_API_SECRET;
-const app_id = process.env.STREAM_APP_ID;
-
 
 export const signup = async (req, res, next) => {
     try {
-        const salt = bcrypt.genSaltSync(10);
-        const hash = bcrypt.hashSync(req.body.password, salt);
-        const userId = crypto.randomBytes(16).toString("hex");
-        const serverClient = connect(api_key, api_secret, app_id);
-        const token = serverClient.createUserToken(userId);
-        const newUser = new User({ token, ...req.body, password: hash });
+        const { name, email, password, avatar } = req.body;
+        // = body;
+        console.log({ name, email, password, avatar });
+        const result = User.create({name, email, password, avatar});
+        // const salt = bcrypt.genSaltSync(10);
+        // const hash = bcrypt.hashSync(req.body.password, salt);
+        // const newUser = new User({ ...req.body, password: hash });
 
-        // await newUser.save();
-        // res.status(200).send("User has been created!");
-        const user = await newUser.save();
-        const client = StreamChat.getInstance(api_key, api_secret);
-        const chatUser = await client.upsertUser({ email: user.email, id: user._id, name: user.name });
-        res.status(200).json(chatUser);
+        // await result.save();s
+        res.status(200).send("User has been created");
     } catch (err) {
         next(err);
     }
