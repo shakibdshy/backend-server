@@ -12,9 +12,9 @@ const app_id = process.env.STREAM_APP_ID;
 
 export const signup = async (req, res, next) => { 
     try {
-        const { fullName, email, password, phoneNumber } = req.body;
+        const { fullName, email: email, password, phoneNumber } = req.body;
                 
-        const userId = fullName;
+        const userId = crypto.randomBytes(10).toString('hex');
 
         const serverClient = connect(api_key, api_secret, app_id);
 
