@@ -14,7 +14,7 @@ export const signup = async (req, res, next) => {
     try {
         const { fullName, email, password, phoneNumber } = req.body;
 
-        const userId = crypto.randomBytes(16).toString('hex');
+        const userId = fullName;
 
         const serverClient = connect(api_key, api_secret, app_id);
 
