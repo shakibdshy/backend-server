@@ -13,7 +13,7 @@ const app_id = process.env.STREAM_APP_ID;
 export const signup = async (req, res, next) => { 
     try {
         const { fullName, email, password, phoneNumber } = req.body;
-
+        
         const userId = fullName;
 
         const serverClient = connect(api_key, api_secret, app_id);
@@ -45,7 +45,7 @@ export const login = async (req, res, next) => {
         const token = serverClient.createUserToken(users[0].id);
 
         if (success) {
-            res.status(200).json({ token, fullName: users[0].fullName, email, userId: users[0].id });
+            res.status(200).json({ token, fullName: users[0].fullName, email: users[0].email, userId: users[0].id });
         } else {
             res.status(500).json({ message: 'Incorrect password' });
         }
