@@ -12,7 +12,7 @@ const app_id = process.env.STREAM_APP_ID;
 
 export const signup = async (req, res, next) => { 
     try {
-        const { fullName, email, password, phoneNumber } = req.body;
+        const { username, email, password, phoneNumber } = req.body;
                 
         const userId = crypto.randomBytes(10).toString('hex');
 
@@ -22,7 +22,7 @@ export const signup = async (req, res, next) => {
 
         const token = serverClient.createUserToken(userId);
 
-        res.status(200).json({ token, fullName, email, userId, hashedPassword, phoneNumber });
+        res.status(200).json({ token, fullName, username, email, userId, hashedPassword, phoneNumber });
         
     } catch (error) {
         next(error);
@@ -31,12 +31,12 @@ export const signup = async (req, res, next) => {
 
 export const login = async (req, res, next) => { 
     try {
-        const { fullName, email, password } = req.body;
+        const { username, password } = req.body;
 
         const serverClient = connect(api_key, api_secret, app_id);
         const client = StreamChat.getInstance(api_key, api_secret);
 
-        const { users } = await client.queryUsers({ email: email, name: fullName });
+        const { users } = await client.queryUsers({ name: username });
 
         if (!users.length) return res.status(400).json({ message: 'User not found' });
 
@@ -45,7 +45,7 @@ export const login = async (req, res, next) => {
         const token = serverClient.createUserToken(users[0].id);
 
         if (success) {
-            res.status(200).json({ token, fullName: users[0].fullName, email: users[0].email, userId: users[0].id });
+            res.status(200).json({ token, fullName: users[0].fullName, username, userId: users[0].id });
         } else {
             res.status(500).json({ message: 'Incorrect password' });
         }
