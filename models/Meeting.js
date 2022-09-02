@@ -4,13 +4,21 @@ const MeetingSchema = new mongoose.Schema({
     name: {
         type: String,
     },
-    id: {
+    date: {
         type: String,
-        required: true,
-        unique: true,
-    }
-}, {
-    timestamps: true,
-})
+    },
+    time1: {
+        type: String,
+    },
+    time2: {
+        type: String,
+    },
+    slot: {
+        type: String,
+    },
+    meetingId: {
+        type: String,
+    },
+}, )
 
-export default mongoose.model("Meeting", MeetingSchema);
+export default mongoose.model("ZoomlaMeeting", MeetingSchema);

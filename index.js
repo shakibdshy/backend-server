@@ -8,6 +8,8 @@ import streamAuth from './routes/streamAuth.routes.js';
 import userRouter from './routes/users.routes.js';
 import meetingRouter from './routes/meeting.routes.js';
 import token from './routes/token.routes.js';
+import feedRouter from './routes/feed.routes.js';
+import storyRouter from './routes/story.routes.js';
 
 const app = express();
 dotenv.config();
@@ -27,6 +29,8 @@ app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);
 app.use("/api/meeting", meetingRouter);
 app.use("/api/token", token);
+app.use("/api/feed", feedRouter);
+app.use("/api/story", storyRouter);
 app.use("/auth", streamAuth);
 
 //CORS middleware

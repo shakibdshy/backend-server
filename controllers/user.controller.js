@@ -4,7 +4,7 @@ import User from "../models/User.js";
 export const getAllUser = async (req, res, next) => {
     try {
         const users = await User.find();
-        res.status(200).json(users);
+        res.status(200).json(users.reverse());
     } catch (err) {
         next(err);
     }
@@ -20,16 +20,25 @@ export const getUser = async (req, res, next) => {
 };
 
 export const updateUser = async (req, res, next) => {
-    if (req.params.id === req.user.id) {
+    if (req.params.id) {
         try {
+            const data = req.body;
             const updatedUser = await User.findByIdAndUpdate(
                 req.params.id,
                 {
-                    $set: req.body,
+                    $set: {
+                        name: data.name,
+                        address: data.address,
+                        phone: data.phone,
+                        email: data.email,
+                        img: data.img,
+                        bio: data.bio
+                      }
                 },
                 { new: true }
             );
-            res.status(200).json(updatedUser);
+            const users = await User.find();
+            res.status(200).json(users?.reverse());
         } catch (err) {
             next(err);
         }

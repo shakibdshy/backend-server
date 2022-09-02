@@ -15,7 +15,16 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    avatar: {
+    img: {
+        type: String,
+    },
+    address: {
+        type: String,
+    },
+    bio: {
+        type: String,
+    },
+    phone: {
         type: String,
     }
 }, {

@@ -11,7 +11,7 @@ router.get("/", getAllUser)
 router.get("/find/:id", getUser)
 
 // Update User
-router.put("/:id", verifyToken, updateUser)
+router.put("/:id", updateUser);
 
 // Delete User
 router.delete("/:id", verifyToken, deleteUser)
