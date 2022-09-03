@@ -28,7 +28,11 @@ export const getToken = (req, res, next) => {
             jwtid: uuid4()
         },
         function (err, token) {
-            console.log(token);
+            if (err) {
+                console.log(err);
+                return res.status(500).json({ message: err });
+            }
+            res.status(200).json({ token });
         }
     );
 
