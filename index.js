@@ -40,13 +40,13 @@ app.use("/api/story", storyRouter);
 app.use("/auth", streamAuth);
 
 //CORS middleware
-var corsMiddleware = function (req, res, next) {
-    res.header('Access-Control-Allow-Origin', 'localhost');
+// var corsMiddleware = function (req, res, next) {
+//     res.header('Access-Control-Allow-Origin', 'localhost');
 
-    next();
-}
+//     next();
+// }
 
-app.use(corsMiddleware);
+// app.use(corsMiddleware);
 
 app.use((err, req, res, next) => {
     const status = err.status || 500;
