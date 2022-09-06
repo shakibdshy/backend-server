@@ -41,7 +41,7 @@ app.use("/auth", streamAuth);
 
 //CORS middleware
 var corsMiddleware = function (req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*.100ms.live');
+    res.header('Access-Control-Allow-Origin', 'https://zoomla.vercel.app');
 
     next();
 }
