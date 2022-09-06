@@ -10,10 +10,7 @@ export const getToken = (req, res, next) => {
 
     var payload = {
         access_key: app_access_key,
-        room_id: process.env.ROOM_ID,
-        user_id: '<user_id>',
-        role: 'host, guest',
-        type: 'app',
+        type: 'management',
         version: 2,
         iat: Math.floor(Date.now() / 1000),
         nbf: Math.floor(Date.now() / 1000)
